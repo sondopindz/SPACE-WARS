@@ -6,8 +6,6 @@ Bullet::Bullet()
 {
   rect_.x = 0;
   rect_.y = 0;
-  x_val_ = 0;
-  y_val_ = 0;
   is_move_ = false;
 }
 
@@ -16,11 +14,11 @@ Bullet::~Bullet()
 
 }
 
-void Bullet::HandleMove(const int& x_border, const int& y_border)
+void Bullet::HandleMove()
 {
-  if (is_move_ == true)
+  if (is_move_)
   {
-    rect_.y -= y_val_;
+    rect_.y -= SPEED_BULLET_MAIN;
     if (rect_.y < 0)
     {
       is_move_ = false;
@@ -28,12 +26,21 @@ void Bullet::HandleMove(const int& x_border, const int& y_border)
   }
 }
 
-void Bullet::HandleMoveRightToLeft()
+void Bullet::HandleMoveEnemyBullet()
 {
-  rect_.x -= x_val_;
-  if (rect_.x < 0)
+      if(is_move_)
+    {
+        rect_.y += SPEED_BULLET_ENEMY;
+    }
+  if (rect_.y + rect_.h >  SCREEN_HEIGHT)
   {
     is_move_ = false;
   }
 }
+void Bullet::MoveSin()
+{
+        rect_.x+=3*cos(60*PI/180);
+        rect_.y+=3*sin(60*PI/180);
+}
+
 

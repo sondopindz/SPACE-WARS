@@ -9,6 +9,7 @@
 #include  "Common_Function.h"
 #include "Plane.h"
 #include "Entity.h"
+#include "Enemy.h"
 #include <algorithm>
 #include <math.h>
 
@@ -19,7 +20,6 @@ public:
 
     bool Init();
     void Run();
-
 private:
     SDL_Window* window;
     SDL_Renderer* renderer;

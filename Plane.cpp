@@ -1,5 +1,3 @@
-
-
 #include "Plane.h"
 #include <bits/stdc++.h>
 using namespace std;
@@ -10,8 +8,6 @@ Plane::Plane()
   rect_.y = 0;
   rect_.w = WIDTH_PLANE;
   rect_.h = HEIGHT_PLANE;
-  x_val_ = 0;
-  y_val_ = 0;
 }
 
 Plane::~Plane()
@@ -25,73 +21,50 @@ void Plane::HandleInputAction(SDL_Event &events,SDL_Texture* &texture_plane,SDL_
 {
     if(state[SDL_SCANCODE_1])
     {
-        SDL_Texture* texture_plane1 = IMG_LoadTexture(renderer,"loadImage/plane1.png");
-        texture_plane = texture_plane1;
-        SDL_Texture* bullet1 = IMG_LoadTexture(renderer,"loadImage/laser.png");
-        bullet = bullet1;
+        texture_plane = IMG_LoadTexture(renderer,"loadImage/plane1.png");
+        bullet = IMG_LoadTexture(renderer,"loadImage/laser.png");
     }
     if(state[SDL_SCANCODE_2])
     {
-        SDL_Texture* texture_plane2 = IMG_LoadTexture(renderer,"loadImage/plane2.png");
-        texture_plane = texture_plane2;
-        SDL_Texture* bullet2 = IMG_LoadTexture(renderer,"loadImage/bullet_plane2.png");
-        bullet = bullet2;
+        texture_plane = IMG_LoadTexture(renderer,"loadImage/plane2.png");
+        bullet = IMG_LoadTexture(renderer,"loadImage/bullet_plane2.png");
     }
     if(state[SDL_SCANCODE_3])
     {
-        SDL_Texture* texture_plane3 = IMG_LoadTexture(renderer,"loadImage/plane3.png");
-        texture_plane = texture_plane3;
-        SDL_Texture* bullet3 = IMG_LoadTexture(renderer,"loadImage/bullet_plane3.png");
-        bullet = bullet3;
+        texture_plane = IMG_LoadTexture(renderer,"loadImage/plane3.png");
+        bullet = IMG_LoadTexture(renderer,"loadImage/bullet_plane3.png");
     }
     if(state[SDL_SCANCODE_UP]||state[SDL_SCANCODE_W])
+    {
       rect_.y = max(0, rect_.y - SPEED_PLANE);
+    }
     if (state[SDL_SCANCODE_DOWN] ||state[SDL_SCANCODE_S])
+    {
         rect_.y = min(SCREEN_HEIGHT - HEIGHT_PLANE, rect_.y + SPEED_PLANE);
-    if (state[SDL_SCANCODE_RIGHT] ||state[SDL_SCANCODE_D])
-      rect_.x = min(SCREEN_WIDTH - WIDTH_PLANE, rect_.x + SPEED_PLANE);
+    }
 
+    if (state[SDL_SCANCODE_RIGHT] ||state[SDL_SCANCODE_D])
+    {
+      rect_.x = min(SCREEN_WIDTH - WIDTH_PLANE, rect_.x + SPEED_PLANE);
+    }
     if (state[SDL_SCANCODE_LEFT] ||state[SDL_SCANCODE_A])
+    {
       rect_.x = max(0, rect_.x - SPEED_PLANE);
+    }
     if(events.type == SDL_MOUSEBUTTONDOWN)
     {
-        Bullet* p_bullet = new Bullet();
         if (events.button.button == SDL_BUTTON_LEFT)
         {
-          p_bullet->SetWidthHeight(WIDTH_LASER, HEIGHT_LASER);
-
-        }
-        else if (events.button.button == SDL_BUTTON_RIGHT)
-        {
-          p_bullet->SetWidthHeight(WIDTH_SPHERE, HEIGHT_SPHERE);
-
-        }
-        p_bullet->SetRect(this->rect_.x + this->rect_.w - 36, this->rect_.y - this->rect_.h*0.2);
-        p_bullet->set_is_move(true);
-        p_bullet->set_y_val(SPEED_BULLET_MAIN);
-        p_bullet_list_.push_back(p_bullet);
-    }
-    if(events.type == SDL_KEYDOWN)
-    {
-        switch(events.key.keysym.sym)
-        {
-      case SDLK_UP:
-      case SDLK_w:
-           y_val_ += SPEED_PLANE; break;
-      case SDLK_DOWN:
-      case SDLK_s:
-        y_val_ -= SPEED_PLANE; break;
-      case SDLK_LEFT:
-      case SDLK_a:
-        x_val_ += SPEED_PLANE; break;
-      case SDLK_RIGHT:
-      case SDLK_d:
-           x_val_ -= SPEED_PLANE; break;
+          Bullet* p_bullet = new Bullet();
+          p_bullet->SetWidthHeight(WIDTH_BULLET_PLANE, HEIGHT_BULLET_PLANE);
+          p_bullet->SetRect(this->rect_.x + this->rect_.w /2 - 2, this->rect_.y - this->rect_.h*0.2);
+          p_bullet->set_is_move(true);
+          p_bullet_list_.push_back(p_bullet);
         }
     }
 }
 
-void Plane::MakeBullet(SDL_Renderer* renderer,SDL_Texture* texture_bullet)
+void Plane::MakeBullet(SDL_Renderer* renderer, SDL_Texture* bullet)
 {
   for (int i = 0; i < p_bullet_list_.size(); i++)
   {
@@ -100,8 +73,9 @@ void Plane::MakeBullet(SDL_Renderer* renderer,SDL_Texture* texture_bullet)
     {
       if (p_bullet_->get_is_move())
       {
-        p_bullet_->Show(texture_bullet,renderer);
-        p_bullet_->HandleMove(SCREEN_WIDTH, SCREEN_HEIGHT);
+        p_bullet_->SetTexture(bullet);
+        p_bullet_->Show(renderer);
+        p_bullet_->MoveSin();
       }
       else
       {
@@ -134,7 +108,4 @@ void Plane::RemoveBullet(const int& idx)
     }
   }
 }
-
-
-
 

@@ -13,7 +13,17 @@ Entity::~Entity()
 
 }
 
-void Entity::Show(SDL_Texture* texture_,SDL_Renderer* renderer)
+void Entity::Show(SDL_Renderer* renderer)
 {
-    SDL_RenderCopy(renderer,texture_,NULL,&rect_);
+    SDL_RenderCopy(renderer,p_object_,NULL,&rect_);
+}
+
+void Entity::LoadTexture(string path,SDL_Renderer* renderer)
+{
+    p_object_ = IMG_LoadTexture(renderer,path.c_str());
+}
+
+void Entity::SetTexture(SDL_Texture* texture)
+{
+    p_object_ = texture;
 }

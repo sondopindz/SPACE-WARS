@@ -7,34 +7,62 @@
 #include "Bullet.h"
 #include <vector>
 
-#define WIDTH_ENEMY 80
-#define HEIGHT_ENEMY 30
+#define WIDTH_ENEMY 30
+#define HEIGHT_ENEMY 15
 
 class Enemy : public Entity
 {
 public:
   Enemy();
   ~Enemy();
+  void SetWidthHeight(const int x,const int y);
+  //Move
+  void MoveEnemy();
+  void set_speed(const float &Speed) {speed=Speed;}
 
-  void HandleMove(const int& x_bordr, const int& y_border);
 
-  void set_x_val(const int& val) {x_val_ = val;}
-  void set_y_val(const int& val) {y_val_ = val;}
-  int get_x_val() const {return x_val_;}
-  int get_y_val() const {return y_val_;}
+  //position
+  void set_x_pos(const double &xPos) {rect_.x=xPos;}
+  void set_y_pos(const double &yPos) {rect_.y=yPos;}
+  double get_x_pos() const {return rect_.x;}
+  double get_y_pos() const {return rect_.y;}
 
-  void SetBulletList(std::vector<Bullet*> bullet_list) {p_bullet_list_ = bullet_list;}
+  //type
+  void set_type_enemy(const int type_) {type=type_;}
+  int get_type_enemy() const {return type;}
+  void set_y_limit(const double &yLimit) {y_limit=yLimit;}
+  void set_status(SDL_Renderer* screen);
+
+  //Bullet
   std::vector<Bullet*> GetBulletList() const {return p_bullet_list_;}
-
   void InitBullet(Bullet* p_bullet);
-  void MakeBullet(SDL_Surface* des, const int& x_limit, const int& y_limit);
-  void Reset(const int& xboder);
+  void MakeBullet(SDL_Renderer* renderer);
+  void Reset();
   void ResetBullet(Bullet* p_bullet);
+
+  //action when die
+  void increase_die() {die++;}
+  bool check_die();
+  int get_score() const {return score;}
+  //void Generate_Health(vector<Icon*>&health,SDL_Renderer* screen);
+
 private:
-  int x_val_;
-  int y_val_;
 
   std::vector<Bullet*> p_bullet_list_;
+  double speed;
+  double y_limit;
+  int type;
+  double angle;
+  bool changespawn;
+
+
+  int die;
+  int score;
+  int delay_shoot_time;
+
+  unsigned long long CurrentTime;
+  unsigned long long LastTime;
+
 };
 
 #endif
