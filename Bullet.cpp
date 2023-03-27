@@ -6,41 +6,36 @@ Bullet::Bullet()
 {
   rect_.x = 0;
   rect_.y = 0;
-  is_move_ = false;
+  is_move = false;
+  angle = 0;
+  speed = 0;
 }
 
 Bullet::~Bullet()
 {
+    Destroy();
+}
 
+void Bullet::set_random_angle1()
+{
+    angle=rand()%(165-15+1)+15;
 }
 
 void Bullet::HandleMove()
 {
-  if (is_move_)
-  {
-    rect_.y -= SPEED_BULLET_MAIN;
-    if (rect_.y < 0)
+    if(is_move)
     {
-      is_move_ = false;
+        rect_.x+=speed*cos(angle*PI/180);
+        rect_.y+=speed*sin(angle*PI/180);
     }
-  }
-}
-
-void Bullet::HandleMoveEnemyBullet()
-{
-      if(is_move_)
+    if(rect_.y <= 0 || rect_.y>=SCREEN_HEIGHT)
     {
-        rect_.y += SPEED_BULLET_ENEMY;
+        is_move=false;
     }
-  if (rect_.y + rect_.h >  SCREEN_HEIGHT)
-  {
-    is_move_ = false;
-  }
-}
-void Bullet::MoveSin()
-{
-        rect_.x+=3*cos(60*PI/180);
-        rect_.y+=3*sin(60*PI/180);
-}
+    if(rect_.x<=0 || rect_.x>=SCREEN_WIDTH)
+    {
+        is_move=false;
+    }
 
+}
 

@@ -6,6 +6,7 @@
 #include "Entity.h"
 #include "Bullet.h"
 #include <vector>
+#include "Plane.h"
 
 #define WIDTH_ENEMY 30
 #define HEIGHT_ENEMY 15
@@ -31,14 +32,12 @@ public:
   void set_type_enemy(const int type_) {type=type_;}
   int get_type_enemy() const {return type;}
   void set_y_limit(const double &yLimit) {y_limit=yLimit;}
-  void set_status(SDL_Renderer* screen);
+  void set_status(SDL_Renderer* renderer);
 
   //Bullet
-  std::vector<Bullet*> GetBulletList() const {return p_bullet_list_;}
-  void InitBullet(Bullet* p_bullet);
-  void MakeBullet(SDL_Renderer* renderer);
-  void Reset();
-  void ResetBullet(Bullet* p_bullet);
+  int canspawnbullet();
+  vector<Bullet*> GetBulletList() const {return p_bullet_list_;}
+  void MakeBullet(SDL_Renderer* renderer,vector<Bullet*> &bullet_list,Plane &plane_);
 
   //action when die
   void increase_die() {die++;}
@@ -46,15 +45,21 @@ public:
   int get_score() const {return score;}
   //void Generate_Health(vector<Icon*>&health,SDL_Renderer* screen);
 
+
+  //angle
+  void set_angle_rotate_speed(const double& angleSpeed) {angle_rotate_speed=angleSpeed;}
+  void rotate_angle();
+  void set_angle(double angle_){angle = angle_;};
 private:
 
-  std::vector<Bullet*> p_bullet_list_;
+  vector<Bullet*> p_bullet_list_;
   double speed;
   double y_limit;
   int type;
   double angle;
   bool changespawn;
-
+  bool reverse_direction;
+  double angle_rotate_speed;
 
   int die;
   int score;

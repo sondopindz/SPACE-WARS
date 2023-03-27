@@ -407,15 +407,15 @@
 	"begin_code.h"
 	"close_code.h"
 
-1678723522 source:c:\users\admin\onedrive\máy tính\sdl project dopin\entity.cpp
+1679927169 source:c:\users\admin\onedrive\máy tính\sdl project dopin\entity.cpp
 	"Entity.h"
 
-1678723522 c:\users\admin\onedrive\máy tính\sdl project dopin\entity.h
+1679925083 c:\users\admin\onedrive\máy tính\sdl project dopin\entity.h
 	"Common_Function.h"
 	<bits/stdc++.h>
 	<string>
 
-1678457574 c:\users\admin\onedrive\máy tính\sdl project dopin\game.h
+1679043122 c:\users\admin\onedrive\máy tính\sdl project dopin\game.h
 	<SDL.h>
 	<SDL_image.h>
 	<iostream>
@@ -424,6 +424,8 @@
 	"Plane.h"
 	"Entity.h"
 	"Enemy.h"
+	"EnemyArray.h"
+	"Collision.h"
 	<algorithm>
 	<math.h>
 
@@ -436,45 +438,47 @@
 1677215363 source:c:\users\admin\onedrive\máy tính\sdl project dopin\commonfuncion.cpp
 	"CommonFuncion.h"
 
-1678974728 source:c:\users\admin\onedrive\máy tính\sdl project dopin\game.cpp
+1679925221 source:c:\users\admin\onedrive\máy tính\sdl project dopin\game.cpp
 	"Game.h"
 
-1678960776 c:\users\admin\onedrive\máy tính\sdl project dopin\common_function.h
+1679927342 c:\users\admin\onedrive\máy tính\sdl project dopin\common_function.h
 	<Windows.h>
 	<string>
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
 	<SDL_ttf.h>
+	<vector>
 
-1678710845 source:c:\users\admin\onedrive\máy tính\sdl project dopin\common_function.cpp
+1679887100 source:c:\users\admin\onedrive\máy tính\sdl project dopin\common_function.cpp
 	"Common_Function.h"
 
-1678960747 source:c:\users\admin\onedrive\máy tính\sdl project dopin\plane.cpp
+1679928042 source:c:\users\admin\onedrive\máy tính\sdl project dopin\plane.cpp
 	"Plane.h"
 	<bits/stdc++.h>
 
-1678721848 c:\users\admin\onedrive\máy tính\sdl project dopin\plane.h
+1679905363 c:\users\admin\onedrive\máy tính\sdl project dopin\plane.h
 	"Entity.h"
 	"Common_Function.h"
 	<vector>
 	"Bullet.h"
 
-1678961311 source:c:\users\admin\onedrive\máy tính\sdl project dopin\bullet.cpp
+1679904626 source:c:\users\admin\onedrive\máy tính\sdl project dopin\bullet.cpp
 	"Bullet.h"
 
-1678960747 c:\users\admin\onedrive\máy tính\sdl project dopin\bullet.h
+1679186890 c:\users\admin\onedrive\máy tính\sdl project dopin\bullet.h
 	"Entity.h"
 	<math.h>
 
-1678974216 source:c:\users\admin\onedrive\máy tính\sdl project dopin\enemy.cpp
+1679927977 source:c:\users\admin\onedrive\máy tính\sdl project dopin\enemy.cpp
 	"Enemy.h"
 
-1678974216 c:\users\admin\onedrive\máy tính\sdl project dopin\enemy.h
+1679842242 c:\users\admin\onedrive\máy tính\sdl project dopin\enemy.h
 	"Common_Function.h"
 	"Entity.h"
 	"Bullet.h"
 	<vector>
+	"Plane.h"
 
 1675731449 c:\users\admin\onedrive\documents\cb coding\sdl2_mixer-2.6.3\x86_64-w64-mingw32\include\sdl2\sdl_mixer.h
 	"SDL_stdinc.h"
@@ -489,4 +493,20 @@
 	"SDL.h"
 	"begin_code.h"
 	"close_code.h"
+
+1679910377 source:c:\users\admin\onedrive\máy tính\sdl project dopin\enemyarray.cpp
+	"EnemyArray.h"
+
+1679905696 c:\users\admin\onedrive\máy tính\sdl project dopin\enemyarray.h
+	"Enemy.h"
+	"Common_Function.h"
+
+1679841755 c:\users\admin\onedrive\máy tính\sdl project dopin\collision.h
+	"Enemy.h"
+	"Plane.h"
+	"Bullet.h"
+	"Common_Function.h"
+
+1679927055 source:c:\users\admin\onedrive\máy tính\sdl project dopin\collision.cpp
+	"Collision.h"
 

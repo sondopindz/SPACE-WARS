@@ -5,25 +5,35 @@ Entity::Entity()
 {
   rect_.x = 0;
   rect_.y = 0;
-  p_object_ = NULL;
+  rect_.w = 0;
+  rect_.h = 0;
+  texture = NULL;
 }
 
 Entity::~Entity()
 {
-
+    Destroy();
 }
 
 void Entity::Show(SDL_Renderer* renderer)
 {
-    SDL_RenderCopy(renderer,p_object_,NULL,&rect_);
+    SDL_RenderCopy(renderer,texture,NULL,&rect_);
 }
 
-void Entity::LoadTexture(string path,SDL_Renderer* renderer)
+SDL_Texture* Entity::LoadTexture(string path,SDL_Renderer* renderer)
 {
-    p_object_ = IMG_LoadTexture(renderer,path.c_str());
+    SDL_Surface* loadSurface = IMG_Load(path.c_str());
+    texture = SDL_CreateTextureFromSurface(renderer, loadSurface);
+    SDL_FreeSurface(loadSurface);
+    return texture;
 }
 
-void Entity::SetTexture(SDL_Texture* texture)
+
+void Entity::Destroy()
 {
-    p_object_ = texture;
+    if (texture != NULL)
+    {
+        SDL_DestroyTexture(texture);
+        texture = NULL;
+    }
 }

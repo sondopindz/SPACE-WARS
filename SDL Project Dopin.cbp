@@ -12,6 +12,7 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add directory="C:/SDL2/x86_64-w64-mingw32/include/SDL2" />
 					<Add directory="../../Documents/CB coding/SDL2_mixer-2.6.3/x86_64-w64-mingw32/include/SDL2" />
@@ -44,17 +45,20 @@
 		</Compiler>
 		<Unit filename="Bullet.cpp" />
 		<Unit filename="Bullet.h" />
+		<Unit filename="Collision.cpp" />
+		<Unit filename="Collision.h" />
 		<Unit filename="Common_Function.cpp" />
 		<Unit filename="Common_Function.h" />
 		<Unit filename="Enemy.cpp" />
 		<Unit filename="Enemy.h" />
+		<Unit filename="EnemyArray.cpp" />
+		<Unit filename="EnemyArray.h" />
 		<Unit filename="Entity.cpp" />
 		<Unit filename="Entity.h" />
 		<Unit filename="Game.cpp" />
 		<Unit filename="Plane.cpp" />
 		<Unit filename="Plane.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="version.h" />
 		<Extensions>
 			<AutoVersioning>
 				<Scheme minor_max="10" build_max="0" rev_max="0" rev_rand_max="10" build_times_to_increment_minor="100" />
