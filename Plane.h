@@ -1,46 +1,45 @@
-
 #ifndef PLANE_H
 #define PLANE_H
 
 #include "Entity.h"
 #include "Common_Function.h"
-#include <vector>
 #include "Bullet.h"
 
 class Plane : public Entity
 {
-public:
-  Plane();
-  ~Plane();
+    public:
+        Plane();
+        ~Plane();
 
-  void HandleInputAction(SDL_Event &events,SDL_Renderer* renderer);
+        void HandleInputAction(SDL_Event &events, SDL_Renderer* renderer, Mix_Chunk* shoot);
 
-    std::vector<Bullet*> GetBulletList() const {return p_bullet_list_;}
-    void MakeBullet( SDL_Renderer* renderer);
-    void RemoveBullet(const int& idx);
-    //life
-    void got_hit(){life--;}
-    void life_decrease()
-    {
-        if(life>0)
+        //Bullet
+        vector<Bullet*> GetBulletList() const {return bullet_list;}
+        void MakeBullet(SDL_Renderer* renderer);
+        void RemoveBullet(const int& idx);
+
+        //Life
+        void got_hit(){life--;}
+        void life_decrease()
         {
-            life--;
+            if(life > 0)
+            {
+                life--;
+            }
         }
-    }
-    void life_increase()
-    {
-        if(life<3 && life>0)
+        void life_increase()
         {
-            life++;
+            if(life < 3 && life > 0)
+            {
+                life++;
+            }
         }
-    }
-    int get_life() {return life;}
+        int get_life() {return life;}
 
-  private:
-    int life;
-  std::vector<Bullet*> p_bullet_list_;
+    private:
+        int life;
+        vector<Bullet*> bullet_list;
+
 };
-
-
 
 #endif

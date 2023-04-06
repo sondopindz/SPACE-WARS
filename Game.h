@@ -1,19 +1,17 @@
-
 #ifndef GAME_H
 #define GAME_H
 
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
-#include <stdio.h>
 #include  "Common_Function.h"
 #include "Plane.h"
 #include "Entity.h"
 #include "Enemy.h"
 #include "EnemyArray.h"
 #include "Collision.h"
-#include <algorithm>
-#include <math.h>
+#include "Button.h"
+#include "Text.h"
 
 class Game {
 public:

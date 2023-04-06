@@ -1,14 +1,11 @@
-
-
 #include "Bullet.h"
 
 Bullet::Bullet()
 {
-  rect_.x = 0;
-  rect_.y = 0;
-  is_move = false;
-  angle = 0;
-  speed = 0;
+    rect_.x = rect_.y = rect_.w = rect_.h = 0;
+    speed = 0;
+    angle = 90;
+    is_move = false;
 }
 
 Bullet::~Bullet()
@@ -18,24 +15,22 @@ Bullet::~Bullet()
 
 void Bullet::set_random_angle1()
 {
-    angle=rand()%(165-15+1)+15;
+    angle = rand()%(165-15+1) + 15;
 }
 
 void Bullet::HandleMove()
 {
-    if(is_move)
+    x_pos += speed*cos(angle*M_PI/180);
+    y_pos += speed*sin(angle*M_PI/180);
+    if(y_pos <= 0 || y_pos >= SCREEN_HEIGHT)
     {
-        rect_.x+=speed*cos(angle*PI/180);
-        rect_.y+=speed*sin(angle*PI/180);
+        is_move = false;
     }
-    if(rect_.y <= 0 || rect_.y>=SCREEN_HEIGHT)
+    if(x_pos <= 0 || x_pos >= SCREEN_WIDTH)
     {
-        is_move=false;
+        is_move = false;
     }
-    if(rect_.x<=0 || rect_.x>=SCREEN_WIDTH)
-    {
-        is_move=false;
-    }
-
+    rect_.x = x_pos;
+    rect_.y = y_pos;
 }
 

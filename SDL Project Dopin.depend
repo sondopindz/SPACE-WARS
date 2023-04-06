@@ -407,27 +407,24 @@
 	"begin_code.h"
 	"close_code.h"
 
-1679927169 source:c:\users\admin\onedrive\máy tính\sdl project dopin\entity.cpp
+1680600284 source:c:\users\admin\onedrive\máy tính\sdl project dopin\entity.cpp
 	"Entity.h"
 
-1679925083 c:\users\admin\onedrive\máy tính\sdl project dopin\entity.h
+1680459394 c:\users\admin\onedrive\máy tính\sdl project dopin\entity.h
 	"Common_Function.h"
-	<bits/stdc++.h>
-	<string>
 
-1679043122 c:\users\admin\onedrive\máy tính\sdl project dopin\game.h
+1680602301 c:\users\admin\onedrive\máy tính\sdl project dopin\game.h
 	<SDL.h>
 	<SDL_image.h>
 	<iostream>
-	<stdio.h>
 	"Common_Function.h"
 	"Plane.h"
 	"Entity.h"
 	"Enemy.h"
 	"EnemyArray.h"
 	"Collision.h"
-	<algorithm>
-	<math.h>
+	"Button.h"
+	"Text.h"
 
 1677215930 c:\users\admin\onedrive\máy tính\sdl project dopin\commonfuncion.h
 	<Windows.h>
@@ -438,46 +435,44 @@
 1677215363 source:c:\users\admin\onedrive\máy tính\sdl project dopin\commonfuncion.cpp
 	"CommonFuncion.h"
 
-1679925221 source:c:\users\admin\onedrive\máy tính\sdl project dopin\game.cpp
+1680753112 source:c:\users\admin\onedrive\máy tính\sdl project dopin\game.cpp
 	"Game.h"
 
-1679927342 c:\users\admin\onedrive\máy tính\sdl project dopin\common_function.h
+1680736893 c:\users\admin\onedrive\máy tính\sdl project dopin\common_function.h
 	<Windows.h>
-	<string>
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
 	<SDL_ttf.h>
 	<vector>
-
-1679887100 source:c:\users\admin\onedrive\máy tính\sdl project dopin\common_function.cpp
-	"Common_Function.h"
-
-1679928042 source:c:\users\admin\onedrive\máy tính\sdl project dopin\plane.cpp
-	"Plane.h"
+	<cmath>
 	<bits/stdc++.h>
+	<string>
 
-1679905363 c:\users\admin\onedrive\máy tính\sdl project dopin\plane.h
+1680750068 source:c:\users\admin\onedrive\máy tính\sdl project dopin\common_function.cpp
+	"Common_Function.h"
+
+1680751010 source:c:\users\admin\onedrive\máy tính\sdl project dopin\plane.cpp
+	"Plane.h"
+
+1680459603 c:\users\admin\onedrive\máy tính\sdl project dopin\plane.h
 	"Entity.h"
 	"Common_Function.h"
-	<vector>
 	"Bullet.h"
 
-1679904626 source:c:\users\admin\onedrive\máy tính\sdl project dopin\bullet.cpp
+1680457138 source:c:\users\admin\onedrive\máy tính\sdl project dopin\bullet.cpp
 	"Bullet.h"
 
-1679186890 c:\users\admin\onedrive\máy tính\sdl project dopin\bullet.h
+1680457188 c:\users\admin\onedrive\máy tính\sdl project dopin\bullet.h
 	"Entity.h"
-	<math.h>
 
-1679927977 source:c:\users\admin\onedrive\máy tính\sdl project dopin\enemy.cpp
+1680751045 source:c:\users\admin\onedrive\máy tính\sdl project dopin\enemy.cpp
 	"Enemy.h"
 
-1679842242 c:\users\admin\onedrive\máy tính\sdl project dopin\enemy.h
+1680457605 c:\users\admin\onedrive\máy tính\sdl project dopin\enemy.h
 	"Common_Function.h"
 	"Entity.h"
 	"Bullet.h"
-	<vector>
 	"Plane.h"
 
 1675731449 c:\users\admin\onedrive\documents\cb coding\sdl2_mixer-2.6.3\x86_64-w64-mingw32\include\sdl2\sdl_mixer.h
@@ -494,19 +489,36 @@
 	"begin_code.h"
 	"close_code.h"
 
-1679910377 source:c:\users\admin\onedrive\máy tính\sdl project dopin\enemyarray.cpp
+1680750356 source:c:\users\admin\onedrive\máy tính\sdl project dopin\enemyarray.cpp
 	"EnemyArray.h"
 
-1679905696 c:\users\admin\onedrive\máy tính\sdl project dopin\enemyarray.h
+1680750389 c:\users\admin\onedrive\máy tính\sdl project dopin\enemyarray.h
 	"Enemy.h"
 	"Common_Function.h"
+	"Plane.h"
 
-1679841755 c:\users\admin\onedrive\máy tính\sdl project dopin\collision.h
+1680753113 c:\users\admin\onedrive\máy tính\sdl project dopin\collision.h
 	"Enemy.h"
 	"Plane.h"
 	"Bullet.h"
 	"Common_Function.h"
 
-1679927055 source:c:\users\admin\onedrive\máy tính\sdl project dopin\collision.cpp
+1680601716 source:c:\users\admin\onedrive\máy tính\sdl project dopin\collision.cpp
 	"Collision.h"
+
+1680713243 source:c:\users\admin\onedrive\máy tính\sdl project dopin\button.cpp
+	"Button.h"
+
+1680456944 c:\users\admin\onedrive\máy tính\sdl project dopin\button.h
+	"Entity.h"
+	"Common_Function.h"
+	"Enemy.h"
+	"Plane.h"
+	"Bullet.h"
+
+1680602574 c:\users\admin\onedrive\máy tính\sdl project dopin\text.h
+	"Common_Function.h"
+
+1680602632 source:c:\users\admin\onedrive\máy tính\sdl project dopin\text.cpp
+	"Text.h"
 

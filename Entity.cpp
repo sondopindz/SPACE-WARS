@@ -1,4 +1,3 @@
-
 #include "Entity.h"
 
 Entity::Entity()
@@ -17,17 +16,16 @@ Entity::~Entity()
 
 void Entity::Show(SDL_Renderer* renderer)
 {
-    SDL_RenderCopy(renderer,texture,NULL,&rect_);
+    SDL_RenderCopy(renderer, texture, NULL, &rect_);
 }
 
-SDL_Texture* Entity::LoadTexture(string path,SDL_Renderer* renderer)
+SDL_Texture* Entity::LoadTexture(const string &path, SDL_Renderer* renderer)
 {
     SDL_Surface* loadSurface = IMG_Load(path.c_str());
     texture = SDL_CreateTextureFromSurface(renderer, loadSurface);
     SDL_FreeSurface(loadSurface);
     return texture;
 }
-
 
 void Entity::Destroy()
 {

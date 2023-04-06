@@ -1,30 +1,35 @@
 #include "Collision.h"
 
-void Collision(vector<Enemy*>&Enemy_List,vector<Bullet*> &Bullet_List, Plane &plane_,SDL_Renderer* renderer,bool &quit)
+void Collision(vector<Enemy*>&Enemy_List, vector<Bullet*> &Bullet_List, Plane &plane_, SDL_Renderer* renderer, Mix_Chunk* explo, bool &Gameover, long &current_score, Mix_Chunk* hit)
 {
-    for(int i=0;i<Enemy_List.size();i++)
+
+    for(int i = 0; i < Enemy_List.size(); i++)
     {
-        Enemy *p_enemy=Enemy_List[i];
-        if(p_enemy!=NULL)
+        Enemy* enemy = Enemy_List[i];
+
+        // Implement Enemy
+        if(enemy != NULL)
         {
-            p_enemy->MoveEnemy();
-            p_enemy->Show(renderer);
-            if(p_enemy->canspawnbullet()==1)
+            enemy->MoveEnemy();
+            enemy->Show(renderer);
+            if(enemy->canspawnbullet())
             {
-                p_enemy->MakeBullet(renderer,Bullet_List,plane_);
+                enemy->MakeBullet(renderer, Bullet_List, plane_);
             }
-            SDL_Rect spaceshipRect = plane_.GetRect();
-            if(p_enemy != NULL)
+            SDL_Rect plane_rect = plane_.GetRect();
+            if(enemy != NULL)
             {
-                SDL_Rect ChickenRect = p_enemy->GetRect();
-                bool Chicken_to_Spaceship = CheckCollision(spaceshipRect, ChickenRect);
-                if (Chicken_to_Spaceship)
+                // Check collision enemy and plane
+                SDL_Rect enemy_rect = enemy->GetRect();
+                bool enemy_to_plane = CheckCollision(plane_rect, enemy_rect);
+                if (enemy_to_plane)
                 {
                     plane_.got_hit();
-                    plane_.SetRect(SCREEN_WIDTH/2,SCREEN_HEIGHT - HEIGHT_PLANE);
+                    plane_.SetRect(SCREEN_WIDTH/2, SCREEN_HEIGHT - HEIGHT_PLANE);
+                    Mix_PlayChannel(5, hit, 0);
                     if(plane_.get_life() == 0)
                     {
-                        quit = true;
+                        Gameover = true;
                         break;
                     }
                 }
@@ -32,79 +37,82 @@ void Collision(vector<Enemy*>&Enemy_List,vector<Bullet*> &Bullet_List, Plane &pl
         }
     }
 
-    for(int j=0;j<Bullet_List.size();j++)
+    for(int j = 0; j < Bullet_List.size(); j++)
     {
-        Bullet*p_bullet=Bullet_List[j];
-        if(p_bullet!=NULL)
+        Bullet* bullet = Bullet_List[j];
+        if(bullet != NULL)
         {
-            SDL_Rect BulletRect=p_bullet->GetRect();
-            SDL_Rect Main_Rect=plane_.GetRect();
-            bool ThreatBullet_to_plane_=CheckCollision(BulletRect,Main_Rect);
-            if(ThreatBullet_to_plane_)
+            // Check collision enemy bullet and plane
+            SDL_Rect bullet_rect = bullet->GetRect();
+            SDL_Rect plane_rect = plane_.GetRect();
+            bool enemy_bullet_to_plane = CheckCollision(bullet_rect, plane_rect);
+            if(enemy_bullet_to_plane)
             {
                 plane_.got_hit();
-                plane_.SetRect(SCREEN_WIDTH/2,SCREEN_HEIGHT - HEIGHT_PLANE);
+                plane_.SetRect(SCREEN_WIDTH/2, SCREEN_HEIGHT - HEIGHT_PLANE);
                 if(plane_.get_life() == 0)
                 {
-                    quit = true;
+                    Gameover = true;
                     break;
                 }
-                p_bullet->set_is_move(false);
-                //Bullet_List.erase(Bullet_List.begin()+j);
+                bullet->set_is_move(false);
+                Mix_PlayChannel(5, hit, 0);
             }
-            if(p_bullet->get_is_move()==true)
+
+            // Implement enemy bullet
+            if(bullet->get_is_move())
             {
-                p_bullet->HandleMove();
-                p_bullet->Show(renderer);
+                bullet->HandleMove();
+                bullet->Show(renderer);
             }
             else
             {
-                Bullet_List.erase(Bullet_List.begin()+j);
-                j--;
-                    delete p_bullet;
-                    p_bullet=NULL;
+                Bullet_List.erase(Bullet_List.begin() + j);
+                delete bullet;
+                bullet = NULL;
             }
         }
     }
 
-
-    vector<Bullet*> plane__bullet_arr=plane_.GetBulletList();
-    for(int k=0;k<plane__bullet_arr.size();k++)
+    vector<Bullet*> plane_bullet_list = plane_.GetBulletList();
+    for(int k = 0; k < plane_bullet_list.size(); k++)
     {
-        Bullet*p_bullet=plane__bullet_arr[k];
-        if(p_bullet!=NULL)
+        Bullet* bullet = plane_bullet_list[k];
+        if(bullet != NULL)
         {
             if(Enemy_List.size() > 0)
             {
-                for(int h=0;h<Enemy_List.size();h++)
+                for(int h = 0; h < Enemy_List.size(); h++)
                 {
-                Enemy* p_enemy=Enemy_List[h];
-                if(p_enemy!=NULL)
-                {
-                    SDL_Rect ThreatRect;
-                    ThreatRect=p_enemy->GetRect();
-                    SDL_Rect BulletRect=p_bullet->GetRect();
-                    bool plane_Bullet_to_Threat=CheckCollision(ThreatRect,BulletRect);
-                    if(plane_Bullet_to_Threat)
+                    Enemy* enemy = Enemy_List[h];
+                    if(enemy != NULL)
                     {
-                        p_enemy->increase_die();
-                        plane_.RemoveBullet(k);
-                        if(p_enemy->check_die())
+                        // Check collision plane bullet and enemy
+                        SDL_Rect enemy_rect = enemy->GetRect();
+                        SDL_Rect bullet_rect = bullet->GetRect();
+                        bool plane_bullet_to_enemy = CheckCollision(enemy_rect, bullet_rect);
+                        if(plane_bullet_to_enemy)
                         {
-                            if(p_enemy!=NULL)
+                            enemy->increase_die();
+                            plane_.RemoveBullet(k);
+                            if(enemy->check_die())
                             {
-                                Enemy_List.erase(Enemy_List.begin()+h);
-                                delete p_enemy;
-                                p_enemy=NULL;
+                                Mix_PlayChannel(4, explo, 0);
+                                current_score += enemy->get_score();
+                                if(enemy != NULL)
+                                {
+                                    Enemy_List.erase(Enemy_List.begin() + h);
+                                    delete enemy;
+                                    enemy = NULL;
+                                }
                             }
+                            break;
                         }
                     }
                 }
             }
         }
-        }
     }
-
 }
 
 

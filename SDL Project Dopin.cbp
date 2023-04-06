@@ -45,6 +45,7 @@
 		</Compiler>
 		<Unit filename="Bullet.cpp" />
 		<Unit filename="Bullet.h" />
+		<Unit filename="Button.cpp" />
 		<Unit filename="Collision.cpp" />
 		<Unit filename="Collision.h" />
 		<Unit filename="Common_Function.cpp" />
@@ -58,6 +59,8 @@
 		<Unit filename="Game.cpp" />
 		<Unit filename="Plane.cpp" />
 		<Unit filename="Plane.h" />
+		<Unit filename="Text.cpp" />
+		<Unit filename="Text.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<AutoVersioning>

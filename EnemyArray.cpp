@@ -1,147 +1,151 @@
 #include "EnemyArray.h"
-using namespace std;
 
-void EnemyArray_Random(vector<Enemy*> &EnemyArray,SDL_Renderer* renderer)
+void EnemyArray_Random(vector<Enemy*> &EnemyArray, SDL_Renderer* renderer)
 {
     for (int t = 0; t < NUM_ENEMIES; t++)
     {
-        Enemy* p_enemy = new Enemy();
-        if (p_enemy != NULL)
+        Enemy* enemy = new Enemy();
+        if (enemy != NULL)
         {
-            p_enemy->set_type_enemy(0);
-            p_enemy->set_status(renderer);
-            p_enemy->SetWidthHeight(WIDTH_ENEMY,HEIGHT_ENEMY);
+            enemy->set_type_enemy(0);
+            enemy->set_status(renderer);
+            enemy->SetWidthHeight(WIDTH_ENEMY, HEIGHT_ENEMY);
             int rand_x = MakeRandValue();
-            p_enemy->SetRect(rand_x, 0);
-            EnemyArray.push_back(p_enemy);
+            enemy->SetRect(rand_x, 0);
+            EnemyArray.push_back(enemy);
         }
-
     }
 }
 
-
-void EnemyArray_Type1(vector<Enemy*> &EnemyArray,SDL_Renderer* renderer)
+void EnemyArray_Type1(vector<Enemy*> &EnemyArray, SDL_Renderer* renderer)
 {
-    for(int i=0;i<Num_of_ThreatArray1;i++)
+    for(int i = 0; i < Num_of_ThreatArray1; i++)
     {
-        Enemy* p_enemy1=new Enemy();
-        if(p_enemy1 != NULL)
+        Enemy* enemy1 = new Enemy();
+        if(enemy1 != NULL)
         {
-            p_enemy1->set_type_enemy(1);
-            p_enemy1->set_status(renderer);
-            p_enemy1->SetWidthHeight(WIDTH_ENEMY,HEIGHT_ENEMY);
-            p_enemy1->set_x_pos(SCREEN_WIDTH/2-(p_enemy1->GetRect().w)/2+100*(i-2));
-            p_enemy1->set_y_limit(200);
-            p_enemy1->set_y_pos(-85*2-25*i);
-            EnemyArray.push_back(p_enemy1);
+            enemy1->set_type_enemy(1);
+            enemy1->set_status(renderer);
+            enemy1->SetWidthHeight(WIDTH_ENEMY, HEIGHT_ENEMY);
+            enemy1->SetRect(SCREEN_WIDTH/2 + 100*(i-2), -85*2 - 25*i);
+            enemy1->set_y_limit(200);
+            EnemyArray.push_back(enemy1);
         }
     }
-    for(int j=0;j<Num_of_ThreatArray1;j++)
+
+    for(int j = 0; j < Num_of_ThreatArray1; j++)
     {
-        Enemy* p_enemy2=new Enemy();
-        if(p_enemy2 != NULL)
+        Enemy* enemy2 = new Enemy();
+        if(enemy2 != NULL)
         {
-            p_enemy2->set_type_enemy(1);
-            p_enemy2->set_status(renderer);
-            p_enemy2->SetWidthHeight(WIDTH_ENEMY,HEIGHT_ENEMY);
-            p_enemy2->set_x_pos(SCREEN_WIDTH/2-(p_enemy2->GetRect().w)/2+100*(j-2));
-            p_enemy2->set_y_limit(300);
-            p_enemy2->set_y_pos(-85-25*j);
-            EnemyArray.push_back(p_enemy2);
+            enemy2->set_type_enemy(1);
+            enemy2->set_status(renderer);
+            enemy2->SetWidthHeight(WIDTH_ENEMY, HEIGHT_ENEMY);
+            enemy2->SetRect(SCREEN_WIDTH/2 + 100*(j-2), -85-25*j);
+            enemy2->set_y_limit(300);
+            EnemyArray.push_back(enemy2);
         }
     }
 }
 
-void EnemyArray_Type2(vector<Enemy*> &EnemyArray,SDL_Renderer* renderer)
+void EnemyArray_Type2(vector<Enemy*> &EnemyArray, SDL_Renderer* renderer)
 {
-    for(int i=0;i<Num_of_ThreatArray2;i++)
+    for(int i = 0; i < Num_of_ThreatArray2; i++)
     {
-        Enemy* p_enemy1=new Enemy();
-        p_enemy1->set_type_enemy(2);
-        p_enemy1->set_status(renderer);
-        p_enemy1->SetWidthHeight(WIDTH_ENEMY,HEIGHT_ENEMY);
-        p_enemy1->set_x_pos(-85);
-        p_enemy1->set_y_pos(SCREEN_WIDTH/3-(p_enemy1->GetRect().h)/2+100*(i-1.5));
-        EnemyArray.push_back(p_enemy1);
+        Enemy* enemy1 = new Enemy();
+        if(enemy1 != NULL)
+        {
+            enemy1->set_type_enemy(2);
+            enemy1->set_status(renderer);
+            enemy1->SetWidthHeight(WIDTH_ENEMY, HEIGHT_ENEMY);
+            enemy1->SetRect(-85, SCREEN_WIDTH/4 + 65*(i-1.5));
+            EnemyArray.push_back(enemy1);
+        }
     }
-    for(int j=0;j<Num_of_ThreatArray2;j++)
+
+    for(int j = 0; j < Num_of_ThreatArray2; j++)
     {
-        Enemy* p_enemy2=new Enemy();
-        p_enemy2->set_type_enemy(3);
-        p_enemy2->set_status(renderer);
-        p_enemy2->SetWidthHeight(WIDTH_ENEMY,HEIGHT_ENEMY);
-        p_enemy2->set_x_pos(SCREEN_WIDTH);
-        p_enemy2->set_y_pos(SCREEN_WIDTH/3-(p_enemy2->GetRect().h)/2+100*(j-1.5));
-        EnemyArray.push_back(p_enemy2);
-    }
-}
-void EnemyArray_Type3(vector<Enemy*> &EnemyArray,SDL_Renderer* renderer)
-{
-    for(int i=0;i<Num_of_ThreatArray3;i++)
-    {
-        Enemy* p_enemy=new Enemy();
-        p_enemy->set_type_enemy(4);
-            p_enemy->set_angle(0);
-            p_enemy->set_angle_rotate_speed(20);
-        p_enemy->set_status(renderer);
-        p_enemy->SetWidthHeight(WIDTH_ENEMY,HEIGHT_ENEMY);
-        p_enemy->set_x_pos(SCREEN_WIDTH/2-(p_enemy->GetRect().w)/2+200*(i-0.5));
-        p_enemy->set_y_limit(100);
-        p_enemy->set_y_pos(-85);
-        EnemyArray.push_back(p_enemy);
+        Enemy* enemy2 = new Enemy();
+        if(enemy2 != NULL)
+        {
+            enemy2->set_type_enemy(3);
+            enemy2->set_status(renderer);
+            enemy2->SetWidthHeight(WIDTH_ENEMY, HEIGHT_ENEMY);
+            enemy2->SetRect(SCREEN_WIDTH, SCREEN_WIDTH/4 + 65*(j-1.5));
+            EnemyArray.push_back(enemy2);
+        }
     }
 }
 
-void EnemyArray_Type4(vector<Enemy*> &EnemyArray,SDL_Renderer* renderer)
+void EnemyArray_Type3(vector<Enemy*> &EnemyArray, SDL_Renderer* renderer)
 {
-    for(int i=0;i<Num_of_ThreatArray4;i++)
+    for(int i = 0; i < Num_of_ThreatArray3; i++)
     {
-        Enemy* p_enemy=new Enemy();
-        p_enemy->set_type_enemy(5);
-        p_enemy->set_status(renderer);
-        p_enemy->SetWidthHeight(WIDTH_ENEMY,HEIGHT_ENEMY);
-        p_enemy->set_x_pos(rand()%(650-int(p_enemy->GetRect().w)-150+1)+150);
-        p_enemy->set_y_limit(200);
-        p_enemy->set_y_pos(-85);
-        EnemyArray.push_back(p_enemy);
+        Enemy* enemy = new Enemy();
+        if(enemy != NULL)
+        {
+            enemy->set_type_enemy(4);
+            enemy->set_angle(0);
+            enemy->set_angle_rotate_speed(20);
+            enemy->set_status(renderer);
+            enemy->SetWidthHeight(WIDTH_ENEMY, HEIGHT_ENEMY);
+            enemy->SetRect(SCREEN_WIDTH/2 - (enemy->GetRect().w)/2 + 200*(i-0.5), -85);
+            enemy->set_y_limit(100);
+            EnemyArray.push_back(enemy);
+        }
     }
 }
 
-void GenerateEnemy(vector<Enemy*> &Enemy_List,SDL_Renderer* renderer,int &wave)
+void EnemyArray_Type4(vector<Enemy*> &EnemyArray, SDL_Renderer* renderer)
 {
-    if(Enemy_List.size()<=0)
+    for(int i = 0; i < Num_of_ThreatArray4; i++)
     {
-        wave+=1;
-            if(wave <= 2)
+        Enemy* enemy = new Enemy();
+        if(enemy != NULL)
+        {
+            enemy->set_type_enemy(5);
+            enemy->set_status(renderer);
+            enemy->SetWidthHeight(WIDTH_ENEMY, HEIGHT_ENEMY);
+            enemy->SetRect((i+1)*SCREEN_WIDTH/4, -85);
+            enemy->set_y_limit(200);
+            EnemyArray.push_back(enemy);
+        }
+    }
+}
+
+void GenerateEnemy(vector<Enemy*> &Enemy_List, SDL_Renderer* renderer, int &wave, Plane &plane_)
+{
+    if(Enemy_List.size() <= 0)
+    {
+        wave += 1;
+        if(wave <= 3)
+        {
+            EnemyArray_Random(Enemy_List, renderer);
+        }
+        else
+        {
+            if(wave == 4)
             {
-                EnemyArray_Random(Enemy_List,renderer);
+                EnemyArray_Type1(Enemy_List, renderer);
             }
-            else
+            if(wave == 5)
             {
-                /*int random = rand()%4+1;
-            if(random==1)
-            {
-                EnemyArray_Type1(Enemy_List,renderer);
+                EnemyArray_Type2(Enemy_List, renderer);
             }
-            else if(random==2)
+            if(wave == 6)
             {
-                EnemyArray_Type2(Enemy_List,renderer);
+                EnemyArray_Type3(Enemy_List, renderer);
             }
-            else if(random==3)
+            if(wave == 7)
             {
-                EnemyArray_Type2(Enemy_List,renderer);
-                EnemyArray_Type3(Enemy_List,renderer);
+                EnemyArray_Type4(Enemy_List, renderer);
             }
-            else if(random == 4)
+            if(wave == 8)
             {
-                EnemyArray_Type2(Enemy_List,renderer);
-                EnemyArray_Type4(Enemy_List,renderer);
-            }*/
-            //EnemyArray_Type4(Enemy_List,renderer);
-            //EnemyArray_Type3(Enemy_List,renderer);
-            //EnemyArray_Type2(Enemy_List,renderer);
-            EnemyArray_Type1(Enemy_List,renderer);
+                wave = 3;
+                plane_.life_increase();
             }
+        }
     }
 }
 

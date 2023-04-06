@@ -4,11 +4,9 @@
 #include "Enemy.h"
 #include "Plane.h"
 #include "Bullet.h"
-
 #include "Common_Function.h"
-using namespace std;
 
-void Collision(vector<Enemy*>&Enemy_List,vector<Bullet*> &Bullet_List,Plane &plane_,SDL_Renderer* renderer,bool &quit);
+void Collision(vector<Enemy*> &Enemy_List, vector<Bullet*> &Bullet_List, Plane &plane_, SDL_Renderer* renderer, Mix_Chunk* explo, bool &Gameover, long &current_score, Mix_Chunk* hit);
 
-#endif // COLLISION_H
+#endif
 

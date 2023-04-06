@@ -1,40 +1,37 @@
-
 #ifndef BULLET_H
 #define BULLET_H
-#include "Entity.h"
-#include<math.h>
-#define WIDTH_LASER 3
-#define HEIGHT_LASER 6
 
-#define WIDTH_BULLET_ENEMY 3
-#define HEIGHT_BULLET_ENEMY 6
+#include "Entity.h"
 
 class Bullet : public Entity
 {
-public:
+    public:
+        Bullet();
+        ~Bullet();
 
-  Bullet();
-  ~Bullet();
-  void HandleMove();
+        void HandleMove();
 
-  void set_speed(const double& Speed) {speed=Speed;}
-  bool get_is_move() const {return is_move;}
-  void set_is_move(bool is_move_) {is_move = is_move_;}
-  void SetWidthHeight(const int& widht,const int& height) {rect_.w = widht; rect_.h = height;}
-  void set_pos(const double& xPos, const double& yPos)
-  {
-    rect_.x=xPos;
-    rect_.y=yPos;
-  }
+        void set_angle(const double& Angle) {angle = Angle;}
+        void set_speed(const double& Speed) {speed = Speed;}
+        bool get_is_move() const {return is_move;}
+        void set_is_move(bool is_move_) {is_move = is_move_;}
 
-  void set_angle(const double& angle_) {angle=angle_;}
-  void set_random_angle1();
+        void set_pos(const double &xPos, const double &yPos)
+        {
+            x_pos = xPos;
+            y_pos = yPos;
+        }
+        void set_random_angle1();
 
-private:
-  double speed;
-  double angle;
-  bool is_move;
+    private:
+        double speed;
+        double x_pos;
+        double y_pos;
+        double angle;
+        bool is_move;
+
 };
 
-
 #endif
+
+
