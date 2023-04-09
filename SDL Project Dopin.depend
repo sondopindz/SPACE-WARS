@@ -410,7 +410,7 @@
 1680600284 source:c:\users\admin\onedrive\máy tính\sdl project dopin\entity.cpp
 	"Entity.h"
 
-1680459394 c:\users\admin\onedrive\máy tính\sdl project dopin\entity.h
+1680882293 c:\users\admin\onedrive\máy tính\sdl project dopin\entity.h
 	"Common_Function.h"
 
 1680602301 c:\users\admin\onedrive\máy tính\sdl project dopin\game.h
@@ -435,10 +435,10 @@
 1677215363 source:c:\users\admin\onedrive\máy tính\sdl project dopin\commonfuncion.cpp
 	"CommonFuncion.h"
 
-1680753112 source:c:\users\admin\onedrive\máy tính\sdl project dopin\game.cpp
+1680971649 source:c:\users\admin\onedrive\máy tính\sdl project dopin\game.cpp
 	"Game.h"
 
-1680736893 c:\users\admin\onedrive\máy tính\sdl project dopin\common_function.h
+1680968565 c:\users\admin\onedrive\máy tính\sdl project dopin\common_function.h
 	<Windows.h>
 	<SDL.h>
 	<SDL_image.h>
@@ -452,10 +452,10 @@
 1680750068 source:c:\users\admin\onedrive\máy tính\sdl project dopin\common_function.cpp
 	"Common_Function.h"
 
-1680751010 source:c:\users\admin\onedrive\máy tính\sdl project dopin\plane.cpp
+1680926870 source:c:\users\admin\onedrive\máy tính\sdl project dopin\plane.cpp
 	"Plane.h"
 
-1680459603 c:\users\admin\onedrive\máy tính\sdl project dopin\plane.h
+1680948821 c:\users\admin\onedrive\máy tính\sdl project dopin\plane.h
 	"Entity.h"
 	"Common_Function.h"
 	"Bullet.h"
@@ -466,7 +466,7 @@
 1680457188 c:\users\admin\onedrive\máy tính\sdl project dopin\bullet.h
 	"Entity.h"
 
-1680751045 source:c:\users\admin\onedrive\máy tính\sdl project dopin\enemy.cpp
+1680971800 source:c:\users\admin\onedrive\máy tính\sdl project dopin\enemy.cpp
 	"Enemy.h"
 
 1680457605 c:\users\admin\onedrive\máy tính\sdl project dopin\enemy.h
@@ -489,27 +489,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1680750356 source:c:\users\admin\onedrive\máy tính\sdl project dopin\enemyarray.cpp
+1680971651 source:c:\users\admin\onedrive\máy tính\sdl project dopin\enemyarray.cpp
 	"EnemyArray.h"
 
-1680750389 c:\users\admin\onedrive\máy tính\sdl project dopin\enemyarray.h
+1680962508 c:\users\admin\onedrive\máy tính\sdl project dopin\enemyarray.h
 	"Enemy.h"
 	"Common_Function.h"
 	"Plane.h"
 
-1680753113 c:\users\admin\onedrive\máy tính\sdl project dopin\collision.h
+1680883874 c:\users\admin\onedrive\máy tính\sdl project dopin\collision.h
 	"Enemy.h"
 	"Plane.h"
 	"Bullet.h"
 	"Common_Function.h"
 
-1680601716 source:c:\users\admin\onedrive\máy tính\sdl project dopin\collision.cpp
+1680883875 source:c:\users\admin\onedrive\máy tính\sdl project dopin\collision.cpp
 	"Collision.h"
 
-1680713243 source:c:\users\admin\onedrive\máy tính\sdl project dopin\button.cpp
+1680960425 source:c:\users\admin\onedrive\máy tính\sdl project dopin\button.cpp
 	"Button.h"
 
-1680456944 c:\users\admin\onedrive\máy tính\sdl project dopin\button.h
+1680960457 c:\users\admin\onedrive\máy tính\sdl project dopin\button.h
 	"Entity.h"
 	"Common_Function.h"
 	"Enemy.h"

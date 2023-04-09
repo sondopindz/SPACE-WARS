@@ -6,7 +6,7 @@
 #include "Bullet.h"
 #include "Common_Function.h"
 
-void Collision(vector<Enemy*> &Enemy_List, vector<Bullet*> &Bullet_List, Plane &plane_, SDL_Renderer* renderer, Mix_Chunk* explo, bool &Gameover, long &current_score, Mix_Chunk* hit);
+void Collision(vector<Enemy*> &Enemy_List, vector<Bullet*> &Bullet_List, Plane &plane_, SDL_Renderer* renderer, Mix_Chunk* explo, bool &Gameover, long &current_score, Mix_Chunk* hit, Mix_Chunk* game_over);
 
 #endif
 

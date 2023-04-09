@@ -22,6 +22,7 @@ Enemy::~Enemy()
 {
     Destroy();
 }
+int check = 1;
 
 void Enemy::MoveEnemy()
 {
@@ -58,13 +59,37 @@ void Enemy::MoveEnemy()
         }
         rect_.x -= SPEED_ENEMY;
     }
+    else if(type == 6)
+    {
+        if(rect_.y >= y_limit)
+        {
+            rect_.y = y_limit;
+            if(check == 1)
+            {
+                rect_.x += 2;
+            }
+            else
+            {
+                rect_.x -= 2;
+            }
+            if(rect_.x > 650 - rect_.w)
+            {
+                check = 0;
+            }
+            else if(rect_.x < 70)
+            {
+                check = 1;
+            }
+        }
+        rect_.y += SPEED_ENEMY;
+    }
 }
 
 int Enemy::canspawnbullet()
 {
     CurrentTime = SDL_GetTicks();
     int check_can_spawn = 0;
-    if(type == 1 || type == 4 || type == 5 || type == 0)
+    if(type == 1 || type == 4 || type == 5 || type == 0 || type == 6)
     {
         if(CurrentTime >= LastTime + delay_shoot_time && rect_.y >= y_limit)
         {
@@ -103,11 +128,11 @@ void Enemy::MakeBullet(SDL_Renderer* renderer, vector<Bullet*> &bullet_list, Pla
     {
         Bullet* bullet = new Bullet();
         delay_shoot_time = 2500;
-        bullet->LoadTexture("img/bullet_plane3.png", renderer);
+        bullet->LoadTexture("img/BulletThreat4.png", renderer);
+        bullet->SetWidthHeight(BULLET_ENEMY_W, BULLET_ENEMY_H);
         bullet->set_is_move(true);
         bullet->set_angle(90);
         bullet->set_speed(2);
-        bullet->SetWidthHeight(BULLET_ENEMY_W, BULLET_ENEMY_H);
         bullet->set_pos(rect_.x + rect_.w*0.47, rect_.y + rect_.h*0.8);
         bullet_list.push_back(bullet);
     }
@@ -180,7 +205,7 @@ void Enemy::MakeBullet(SDL_Renderer* renderer, vector<Bullet*> &bullet_list, Pla
 
     else if(type == 5)
     {
-        delay_shoot_time = 2200;
+        delay_shoot_time = 1200;
         for(int u = 0; u < 12; u++)
         {
             Bullet* bullet = new Bullet();
@@ -190,6 +215,31 @@ void Enemy::MakeBullet(SDL_Renderer* renderer, vector<Bullet*> &bullet_list, Pla
                 bullet->SetWidthHeight(BULLET_ENEMY_W, BULLET_ENEMY_H);
                 bullet->set_is_move(true);
                 bullet->set_angle(30*u);
+                bullet->set_speed(3);
+                bullet->set_pos(rect_.x + rect_.w/2 - (bullet->GetRect().w)/2, rect_.y + rect_.h/2 - bullet->GetRect().h/2);
+                bullet_list.push_back(bullet);
+            }
+        }
+    }
+    else if(type == 6)
+    {
+        delay_shoot_time = 1500;
+        for(int i = 0; i < 36; i++)
+        {
+            Bullet* bullet = new Bullet();
+            if(bullet != NULL)
+            {
+                if(i % 2 == 1)
+                {
+                    bullet->LoadTexture("img//BulletThreat.png", renderer);
+                }
+                else
+                {
+                    bullet->LoadTexture("img//BulletThreat5.png", renderer);
+                }
+                bullet->SetWidthHeight(BULLET_ENEMY_W, BULLET_ENEMY_H);
+                bullet->set_is_move(true);
+                bullet->set_angle(10*i);
                 bullet->set_speed(3);
                 bullet->set_pos(rect_.x + rect_.w/2 - (bullet->GetRect().w)/2, rect_.y + rect_.h/2 - bullet->GetRect().h/2);
                 bullet_list.push_back(bullet);
@@ -207,39 +257,56 @@ void Enemy::set_status(SDL_Renderer* renderer)
     }
     else if(type == 1)
     {
-        LoadTexture("img/SpaceThreat1.png", renderer);
+        LoadTexture("img/image.psd (13).png", renderer);
         score = 200;
     }
     else if(type == 4)
     {
-        LoadTexture("img/SpaceThreat6.png", renderer);
+        LoadTexture("img/enemy_type4.png", renderer);
         score = 500;
     }
     else if(type == 3 || type == 2)
     {
-        LoadTexture("img/SpaceThreat2.png", renderer);
+        LoadTexture("img/image.psd (14).png", renderer);
         score = 300;
     }
     else if(type == 5)
     {
-        LoadTexture("img//SpaceThreat2.png", renderer);
+        LoadTexture("img//anyrgb.com.png", renderer);
         score = 500;
+    }
+    else if(type == 6)
+    {
+        LoadTexture("img/pngwing.com.png", renderer);
+        score = 1000;
     }
 }
 
 bool Enemy::check_die()
 {
-    if(type == 1 || type == 2 || type == 3 || type == 5)
+    if(type == 1)
     {
         if(die == 3) return 1;
     }
     else if(type == 4)
     {
-        if(die == 3) return 1;
+        if(die == 4) return 1;
     }
     else if(type == 0)
     {
         if(die == 2) return 1;
+    }
+    else if(type == 2 || type == 3)
+    {
+        if(die == 5) return 1;
+    }
+    else if(type == 5)
+    {
+        if(die == 5) return 1;
+    }
+    else if(type == 6)
+    {
+        if(die == 50) return 1;
     }
     return 0;
 }

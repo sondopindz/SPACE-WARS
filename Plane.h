@@ -11,7 +11,7 @@ class Plane : public Entity
         Plane();
         ~Plane();
 
-        void HandleInputAction(SDL_Event &events, SDL_Renderer* renderer, Mix_Chunk* shoot);
+        void HandleInputAction(SDL_Event &events, SDL_Renderer* renderer, Mix_Chunk* shoot, int &plane_type);
 
         //Bullet
         vector<Bullet*> GetBulletList() const {return bullet_list;}
@@ -35,6 +35,7 @@ class Plane : public Entity
             }
         }
         int get_life() {return life;}
+        void set_life(int life_){life = life_;};
 
     private:
         int life;

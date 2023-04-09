@@ -9,7 +9,7 @@ void EnemyArray_Random(vector<Enemy*> &EnemyArray, SDL_Renderer* renderer)
         {
             enemy->set_type_enemy(0);
             enemy->set_status(renderer);
-            enemy->SetWidthHeight(WIDTH_ENEMY, HEIGHT_ENEMY);
+            enemy->SetWidthHeight(30, 30);
             int rand_x = MakeRandValue();
             enemy->SetRect(rand_x, 0);
             EnemyArray.push_back(enemy);
@@ -26,7 +26,7 @@ void EnemyArray_Type1(vector<Enemy*> &EnemyArray, SDL_Renderer* renderer)
         {
             enemy1->set_type_enemy(1);
             enemy1->set_status(renderer);
-            enemy1->SetWidthHeight(WIDTH_ENEMY, HEIGHT_ENEMY);
+            enemy1->SetWidthHeight(30, 38);
             enemy1->SetRect(SCREEN_WIDTH/2 + 100*(i-2), -85*2 - 25*i);
             enemy1->set_y_limit(200);
             EnemyArray.push_back(enemy1);
@@ -57,7 +57,7 @@ void EnemyArray_Type2(vector<Enemy*> &EnemyArray, SDL_Renderer* renderer)
         {
             enemy1->set_type_enemy(2);
             enemy1->set_status(renderer);
-            enemy1->SetWidthHeight(WIDTH_ENEMY, HEIGHT_ENEMY);
+            enemy1->SetWidthHeight(40, 32);
             enemy1->SetRect(-85, SCREEN_WIDTH/4 + 65*(i-1.5));
             EnemyArray.push_back(enemy1);
         }
@@ -70,7 +70,7 @@ void EnemyArray_Type2(vector<Enemy*> &EnemyArray, SDL_Renderer* renderer)
         {
             enemy2->set_type_enemy(3);
             enemy2->set_status(renderer);
-            enemy2->SetWidthHeight(WIDTH_ENEMY, HEIGHT_ENEMY);
+            enemy2->SetWidthHeight(40, 32);
             enemy2->SetRect(SCREEN_WIDTH, SCREEN_WIDTH/4 + 65*(j-1.5));
             EnemyArray.push_back(enemy2);
         }
@@ -86,9 +86,9 @@ void EnemyArray_Type3(vector<Enemy*> &EnemyArray, SDL_Renderer* renderer)
         {
             enemy->set_type_enemy(4);
             enemy->set_angle(0);
-            enemy->set_angle_rotate_speed(20);
+            enemy->set_angle_rotate_speed(10);
             enemy->set_status(renderer);
-            enemy->SetWidthHeight(WIDTH_ENEMY, HEIGHT_ENEMY);
+            enemy->SetWidthHeight(40, 76);
             enemy->SetRect(SCREEN_WIDTH/2 - (enemy->GetRect().w)/2 + 200*(i-0.5), -85);
             enemy->set_y_limit(100);
             EnemyArray.push_back(enemy);
@@ -105,11 +105,26 @@ void EnemyArray_Type4(vector<Enemy*> &EnemyArray, SDL_Renderer* renderer)
         {
             enemy->set_type_enemy(5);
             enemy->set_status(renderer);
-            enemy->SetWidthHeight(WIDTH_ENEMY, HEIGHT_ENEMY);
+            enemy->SetWidthHeight(50, 50);
             enemy->SetRect((i+1)*SCREEN_WIDTH/4, -85);
-            enemy->set_y_limit(200);
+            enemy->set_y_limit(150);
             EnemyArray.push_back(enemy);
         }
+    }
+}
+
+void EnemyBoss(vector<Enemy*> &EnemyArray, SDL_Renderer* renderer)
+{
+    Enemy* enemy = new Enemy();
+    if(enemy != NULL)
+    {
+        enemy->set_type_enemy(6);
+        enemy->set_status(renderer);
+        enemy->set_angle_rotate_speed(0.5);
+        enemy->SetWidthHeight(100, 100);
+        enemy->SetRect(SCREEN_WIDTH/2 - enemy->GetRect().w/2, -enemy->GetRect().h);
+        enemy->set_y_limit(100);
+        EnemyArray.push_back(enemy);
     }
 }
 
@@ -142,8 +157,8 @@ void GenerateEnemy(vector<Enemy*> &Enemy_List, SDL_Renderer* renderer, int &wave
             }
             if(wave == 8)
             {
-                wave = 3;
                 plane_.life_increase();
+                EnemyBoss(Enemy_List, renderer);
             }
         }
     }

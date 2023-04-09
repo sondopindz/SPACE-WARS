@@ -89,7 +89,7 @@ void Button::HandleBackButton(SDL_Event &event, SDL_Renderer* renderer, bool &me
 	}
 }
 
-void Button::HandleRestartButton(SDL_Event &event, SDL_Renderer* renderer, vector<Enemy*> &Enemy_List, Plane &plane_, vector<Bullet*> &Bullet_List, int &wave, long &current_score, bool &GameOver)
+void Button::HandleRestartButton(SDL_Event &event, SDL_Renderer* renderer, vector<Enemy*> &Enemy_List, Plane &plane_, vector<Bullet*> &Bullet_List, int &wave, long &current_score, bool &GameOver, bool &Win, int &check)
 {
     if(IsInside(event))
 	{
@@ -97,11 +97,14 @@ void Button::HandleRestartButton(SDL_Event &event, SDL_Renderer* renderer, vecto
 		if(event.type == SDL_MOUSEBUTTONDOWN)
 		{
 		    GameOver = false;
+		    check = 0;
+		    Win = false;
             current_score = 0;
             wave = 0;
             Enemy_List.erase(Enemy_List.begin(), Enemy_List.begin() + Enemy_List.size());
             Bullet_List.erase(Bullet_List.begin(), Bullet_List.begin() + Bullet_List.size());
             plane_.SetRect(SCREEN_WIDTH/2, SCREEN_HEIGHT - HEIGHT_PLANE);
+            plane_.set_life(3);
 		}
 	}
 	else

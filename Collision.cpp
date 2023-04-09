@@ -1,6 +1,6 @@
 #include "Collision.h"
 
-void Collision(vector<Enemy*>&Enemy_List, vector<Bullet*> &Bullet_List, Plane &plane_, SDL_Renderer* renderer, Mix_Chunk* explo, bool &Gameover, long &current_score, Mix_Chunk* hit)
+void Collision(vector<Enemy*>&Enemy_List, vector<Bullet*> &Bullet_List, Plane &plane_, SDL_Renderer* renderer, Mix_Chunk* explo, bool &Gameover, long &current_score, Mix_Chunk* hit, Mix_Chunk* game_over)
 {
 
     for(int i = 0; i < Enemy_List.size(); i++)
@@ -30,6 +30,7 @@ void Collision(vector<Enemy*>&Enemy_List, vector<Bullet*> &Bullet_List, Plane &p
                     if(plane_.get_life() == 0)
                     {
                         Gameover = true;
+                        Mix_PlayChannel(6, game_over, 0);
                         break;
                     }
                 }
@@ -53,6 +54,7 @@ void Collision(vector<Enemy*>&Enemy_List, vector<Bullet*> &Bullet_List, Plane &p
                 if(plane_.get_life() == 0)
                 {
                     Gameover = true;
+                    Mix_PlayChannel(6, game_over, 0);
                     break;
                 }
                 bullet->set_is_move(false);

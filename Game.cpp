@@ -52,6 +52,7 @@ void Game::Run()
     vector<Enemy*> Enemy_List;
     vector<Bullet*> Bullet_List;
     Entity GameOverUI;
+    Entity WinGame;
     Button PlayButton;
     Button HelpButton;
     Button ExitButton;
@@ -74,6 +75,7 @@ void Game::Run()
     //Load Texture
     SDL_Texture* texture_bg = IMG_LoadTexture(renderer, "img/background.png");
     GameOverUI.LoadTexture("img//GameOver.png", renderer);
+    WinGame.LoadTexture("img/WinGame.png", renderer);
     game_menu.LoadTexture("img//menu.png", renderer);
     game_help.LoadTexture("img//help.png", renderer);
     game_pause.LoadTexture("img//Pause.png", renderer);
@@ -81,6 +83,7 @@ void Game::Run()
     game_help.SetWidthHeight(SCREEN_WIDTH, SCREEN_HEIGHT);
     game_pause.SetWidthHeight(800, 200);
     GameOverUI.SetWidthHeight(SCREEN_WIDTH, SCREEN_HEIGHT);
+    WinGame.SetWidthHeight(SCREEN_WIDTH, SCREEN_HEIGHT);
 
     PlayButton.SetWidthHeight(106, 42);
     HelpButton.SetWidthHeight(106, 42);
@@ -89,17 +92,21 @@ void Game::Run()
     RestartButton.SetWidthHeight(190, 42);
 
     //Init Sounds
-    Mix_Chunk* plane_shoot = Mix_LoadWAV("Music/ES_Gunshot Shotgun 162 - SFX Producer (1).wav");
-    Mix_Chunk* explo = Mix_LoadWAV("Music/mixkit-arcade-game-explosion-2759.wav");
-    Mix_Chunk* Menu = Mix_LoadWAV("Music/Menu.wav");
-    Mix_Chunk* BGM = Mix_LoadWAV("Music//bgm.wav");
-    Mix_Chunk* hit = Mix_LoadWAV("Music/mixkit-arcade-space-shooter-dead-notification-272.wav");
+    Mix_Chunk* plane_shoot = Mix_LoadWAV("musics/ES_Gunshot Shotgun 162 - SFX Producer (1).wav");
+    Mix_Chunk* explo = Mix_LoadWAV("musics/mixkit-arcade-game-explosion-2759.wav");
+    Mix_Chunk* Menu = Mix_LoadWAV("musics/Menu.wav");
+    Mix_Chunk* BGM = Mix_LoadWAV("musics//bgm.wav");
+    Mix_Chunk* hit = Mix_LoadWAV("musics/mixkit-arcade-space-shooter-dead-notification-272.wav");
+    Mix_Chunk* game_over = Mix_LoadWAV("musics/game_over.wav");
+    Mix_Chunk* win_game = Mix_LoadWAV("musics/success-fanfare-trumpets-6185.wav");
 
     Mix_VolumeChunk(plane_shoot, MIX_MAX_VOLUME/7);
     Mix_VolumeChunk(explo, MIX_MAX_VOLUME/3);
     Mix_VolumeChunk(Menu, MIX_MAX_VOLUME/4);
     Mix_VolumeChunk(BGM, MIX_MAX_VOLUME/4);
     Mix_VolumeChunk(hit, MIX_MAX_VOLUME/4);
+    Mix_VolumeChunk(game_over, MIX_MAX_VOLUME/4);
+    Mix_VolumeChunk(win_game, MIX_MAX_VOLUME/2);
 
     currentscore.SetColor(Text::REDCOLOR);
     numberofcurrentscore.SetColor(Text::WHITECOLOR);
@@ -188,11 +195,15 @@ void Game::Run()
 
     Mix_HaltChannel(1);
     plane_.LoadTexture("img/plane1.png", renderer);
+    //SDL_Texture* bullet_text = IMG_LoadTexture(renderer, "img/laser.png");
     int wave = 0;
     long current_score = 0;
+    int plane_type = 1;
 
     bool paused = false;
     bool GameOver = false;
+    bool Win = false;
+    int check = 0;
     Uint32 frameStart;
     Uint32 frameTime;
 
@@ -202,7 +213,7 @@ void Game::Run()
         {
             Mix_PlayChannel(2, BGM, -1);
         }
-        if(!GameOver)
+        if(!GameOver && !Win)
         {
             if(paused)
             {
@@ -222,6 +233,7 @@ void Game::Run()
                         play = false;
                     }
                 }
+                SDL_RenderClear(renderer);
                 game_pause.SetRect(SCREEN_WIDTH/2 - game_pause.GetRect().w/2, SCREEN_HEIGHT/3 - game_pause.GetRect().h);
                 game_pause.Show(renderer);
                 SDL_RenderPresent(renderer);
@@ -250,13 +262,13 @@ void Game::Run()
                 SDL_RenderCopy(renderer, texture_bg, NULL, NULL);
 
                 //Implement Plane
-                plane_.HandleInputAction(e, renderer, plane_shoot);
+                plane_.HandleInputAction(e, renderer, plane_shoot, plane_type);
                 plane_.Show(renderer);
                 plane_.MakeBullet(renderer);
 
                 //Implement Enemy
                 GenerateEnemy(Enemy_List, renderer, wave, plane_);
-                Collision(Enemy_List, Bullet_List, plane_, renderer, explo, GameOver, current_score, hit);
+                Collision(Enemy_List, Bullet_List, plane_, renderer, explo, GameOver, current_score, hit, game_over);
 
                 UpdateHighScore("high_score.txt", current_score, str_high_score);
                 highscore.RenderText(renderer, SCREEN_WIDTH/2 - 50, 10);
@@ -285,17 +297,20 @@ void Game::Run()
 
             }
         }
-        else
+        else if(GameOver && !Win)
         {
             SDL_PollEvent(&e);
             if(e.type == SDL_QUIT)
             {
                 play = false;
             }
+            Mix_HaltChannel(2);
 
-            RestartButton.HandleRestartButton(e, renderer, Enemy_List, plane_, Bullet_List, wave, current_score, GameOver);
+            RestartButton.HandleRestartButton(e, renderer, Enemy_List, plane_, Bullet_List, wave, current_score, GameOver, Win, check);
             ExitButton.HandleExitButton(e, renderer, play);
+            SDL_RenderClear(renderer);
             GameOverUI.Show(renderer);
+
             RestartButton.SetRect(30, SCREEN_HEIGHT - RestartButton.GetRect().h - 30);
             RestartButton.Show(renderer);
             ExitButton.SetRect(SCREEN_WIDTH - ExitButton.GetRect().w - 30, SCREEN_HEIGHT - ExitButton.GetRect().h - 30);
@@ -306,6 +321,45 @@ void Game::Run()
             numberofcurrentscore.RenderText(renderer, SCREEN_WIDTH/2 - 50, SCREEN_HEIGHT/2 );
 
             Wave.Set_Text(number_to_string1(wave));
+            Wave.LoadFromRenderText(font, renderer);
+            Wave.RenderText(renderer, SCREEN_WIDTH/2 - 10,SCREEN_HEIGHT/2 - 15 + 100);
+
+            Rating.Set_Text(RatingBaseOnScore(current_score));
+            Rating.LoadFromRenderText(font, renderer);
+            Rating.RenderText(renderer, SCREEN_WIDTH/2 - 10, SCREEN_HEIGHT/2 - 15 + 190);
+
+            SDL_RenderPresent(renderer);
+        }
+        if(wave == 9)
+        {
+            Win = true;
+            SDL_PollEvent(&e);
+            if(e.type == SDL_QUIT)
+            {
+                play = false;
+            }
+            Mix_HaltChannel(2);
+            if(check == 0)
+            {
+                Mix_PlayChannel(7, win_game, 0);
+                check = 1;
+            }
+
+            RestartButton.HandleRestartButton(e, renderer, Enemy_List, plane_, Bullet_List, wave, current_score, GameOver, Win, check);
+            ExitButton.HandleExitButton(e, renderer, play);
+            SDL_RenderClear(renderer);
+            WinGame.Show(renderer);
+
+            RestartButton.SetRect(30, SCREEN_HEIGHT - RestartButton.GetRect().h - 30);
+            RestartButton.Show(renderer);
+            ExitButton.SetRect(SCREEN_WIDTH - ExitButton.GetRect().w - 30, SCREEN_HEIGHT - ExitButton.GetRect().h - 30);
+            ExitButton.Show(renderer);
+
+            numberofcurrentscore.Set_Text(number_to_string(current_score));
+            numberofcurrentscore.LoadFromRenderText(font, renderer);
+            numberofcurrentscore.RenderText(renderer, SCREEN_WIDTH/2 - 50, SCREEN_HEIGHT/2 );
+
+            Wave.Set_Text(number_to_string1(wave - 1));
             Wave.LoadFromRenderText(font, renderer);
             Wave.RenderText(renderer, SCREEN_WIDTH/2 - 10,SCREEN_HEIGHT/2 - 15 + 100);
 
@@ -347,6 +401,12 @@ void Game::Run()
     Menu = NULL;
     Mix_FreeChunk(BGM);
     BGM = NULL;
+    Mix_FreeChunk(game_over);
+    game_over = NULL;
+    Mix_FreeChunk(win_game);
+    win_game = NULL;
+
+    GameOverUI.Destroy();
 
     Clean();
     SDL_Quit();

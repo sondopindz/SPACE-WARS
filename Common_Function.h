@@ -20,8 +20,8 @@ const int FPS = 80;
 const int DELAY_TIME = 1000/FPS;
 
 //plane
-const int WIDTH_PLANE = 25;
-const int HEIGHT_PLANE = 40;
+const int WIDTH_PLANE = 30;
+const int HEIGHT_PLANE = 45;
 const int SPEED_PLANE = 4;
 const int POS_X_START_PLANE  = SCREEN_WIDTH/2;
 const int POS_Y_START_PLANE  = SCREEN_HEIGHT - HEIGHT_PLANE;

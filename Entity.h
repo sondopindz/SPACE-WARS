@@ -10,6 +10,7 @@ class Entity
         ~Entity();
 
         SDL_Texture* LoadTexture(const string &path, SDL_Renderer* renderer);
+        void SetTexture(SDL_Texture* text){texture = text;};
         void Destroy();
         void Show(SDL_Renderer* renderer);
         SDL_Rect GetRect() const {return rect_;}

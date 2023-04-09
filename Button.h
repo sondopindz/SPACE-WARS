@@ -18,7 +18,7 @@ class Button : public Entity
         void HandleHelpButton(SDL_Event &event, SDL_Renderer* renderer, bool &menu, bool &help);
         void HandleExitButton(SDL_Event &event, SDL_Renderer* renderer, bool &QuitMenu);
         void HandleBackButton(SDL_Event &event, SDL_Renderer* renderer, bool &menu, bool &help);
-        void HandleRestartButton(SDL_Event &event, SDL_Renderer* renderer, vector<Enemy*> &Enemy_List, Plane &plane_, vector<Bullet*> &Bullet_List, int &wave, long &current_score, bool &GameOver);
+        void HandleRestartButton(SDL_Event &event, SDL_Renderer* renderer, vector<Enemy*> &Enemy_List, Plane &plane_, vector<Bullet*> &Bullet_List, int &wave, long &current_score, bool &GameOver, bool &Win, int &check);
 
 };
 
