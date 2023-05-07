@@ -18,18 +18,23 @@ bool Game::Init()
     {
         return false;
     }
-    window = SDL_CreateWindow("GAME", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+
+    window = SDL_CreateWindow("                                                                                         SPACE WARS", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+
     if (!window)
     {
         std::cout << "Error creating window:" << SDL_GetError() << std::endl;
         return false;
     }
+
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
     if (!renderer)
     {
         std::cout << "Error creating renderer:" << SDL_GetError() << std::endl;
         return false;
     }
+
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
     TTF_Init();
     return true;
@@ -51,8 +56,10 @@ void Game::Run()
     Plane plane_;
     vector<Enemy*> Enemy_List;
     vector<Bullet*> Bullet_List;
+
     Entity GameOverUI;
     Entity WinGame;
+
     Button PlayButton;
     Button HelpButton;
     Button ExitButton;
@@ -61,6 +68,7 @@ void Game::Run()
     Button game_menu;
     Button game_help;
     Button game_pause;
+
     Text currentscore;
     Text numberofcurrentscore;
     Text highscore;
@@ -79,6 +87,7 @@ void Game::Run()
     game_menu.LoadTexture("img//menu.png", renderer);
     game_help.LoadTexture("img//help.png", renderer);
     game_pause.LoadTexture("img//Pause.png", renderer);
+
     game_menu.SetWidthHeight(SCREEN_WIDTH, SCREEN_HEIGHT);
     game_help.SetWidthHeight(SCREEN_WIDTH, SCREEN_HEIGHT);
     game_pause.SetWidthHeight(800, 200);
@@ -92,13 +101,13 @@ void Game::Run()
     RestartButton.SetWidthHeight(190, 42);
 
     //Init Sounds
-    Mix_Chunk* plane_shoot = Mix_LoadWAV("musics/ES_Gunshot Shotgun 162 - SFX Producer (1).wav");
-    Mix_Chunk* explo = Mix_LoadWAV("musics/mixkit-arcade-game-explosion-2759.wav");
+    Mix_Chunk* plane_shoot = Mix_LoadWAV("musics/plane_shoot.wav");
+    Mix_Chunk* explo = Mix_LoadWAV("musics/explosion.wav");
     Mix_Chunk* Menu = Mix_LoadWAV("musics/Menu.wav");
-    Mix_Chunk* BGM = Mix_LoadWAV("musics//bgm.wav");
-    Mix_Chunk* hit = Mix_LoadWAV("musics/mixkit-arcade-space-shooter-dead-notification-272.wav");
+    Mix_Chunk* BGM = Mix_LoadWAV("musics//music_game.wav");
+    Mix_Chunk* hit = Mix_LoadWAV("musics/plane_dead.wav");
     Mix_Chunk* game_over = Mix_LoadWAV("musics/game_over.wav");
-    Mix_Chunk* win_game = Mix_LoadWAV("musics/success-fanfare-trumpets-6185.wav");
+    Mix_Chunk* win_game = Mix_LoadWAV("musics/win_game.wav");
 
     Mix_VolumeChunk(plane_shoot, MIX_MAX_VOLUME/7);
     Mix_VolumeChunk(explo, MIX_MAX_VOLUME/3);
@@ -153,6 +162,7 @@ void Game::Run()
         {
             QuitMenu = true;
         }
+
         if(menu)
         {
             SDL_RenderClear(renderer);
@@ -170,6 +180,7 @@ void Game::Run()
             PlayButton.Show(renderer);
             ExitButton.Show(renderer);
         }
+
         if(help)
         {
             SDL_RenderClear(renderer);
@@ -184,6 +195,7 @@ void Game::Run()
             PlayButton.Show(renderer);
             BackButton.Show(renderer);
         }
+
         SDL_RenderPresent(renderer);
 
         PlayButton.Destroy();
@@ -195,7 +207,6 @@ void Game::Run()
 
     Mix_HaltChannel(1);
     plane_.LoadTexture("img/plane1.png", renderer);
-    //SDL_Texture* bullet_text = IMG_LoadTexture(renderer, "img/laser.png");
     int wave = 0;
     long current_score = 0;
     int plane_type = 1;
@@ -213,6 +224,7 @@ void Game::Run()
         {
             Mix_PlayChannel(2, BGM, -1);
         }
+
         if(!GameOver && !Win)
         {
             if(paused)
@@ -233,11 +245,15 @@ void Game::Run()
                         play = false;
                     }
                 }
+
                 SDL_RenderClear(renderer);
+
                 game_pause.SetRect(SCREEN_WIDTH/2 - game_pause.GetRect().w/2, SCREEN_HEIGHT/3 - game_pause.GetRect().h);
                 game_pause.Show(renderer);
+
                 SDL_RenderPresent(renderer);
             }
+
             else if(!paused)
             {
                 frameStart = SDL_GetTicks();
@@ -258,9 +274,10 @@ void Game::Run()
                         play = false;
                     }
                 }
-                SDL_RenderClear(renderer);
-                SDL_RenderCopy(renderer, texture_bg, NULL, NULL);
 
+                SDL_RenderClear(renderer);
+
+                SDL_RenderCopy(renderer, texture_bg, NULL, NULL);
                 //Implement Plane
                 plane_.HandleInputAction(e, renderer, plane_shoot, plane_type);
                 plane_.Show(renderer);
@@ -294,9 +311,9 @@ void Game::Run()
                 {
                     SDL_Delay(DELAY_TIME - frameTime);
                 }
-
             }
         }
+
         else if(GameOver && !Win)
         {
             SDL_PollEvent(&e);
@@ -330,6 +347,7 @@ void Game::Run()
 
             SDL_RenderPresent(renderer);
         }
+
         if(wave == 9)
         {
             Win = true;

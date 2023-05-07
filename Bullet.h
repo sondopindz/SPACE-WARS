@@ -22,6 +22,8 @@ class Bullet : public Entity
             y_pos = yPos;
         }
         void set_random_angle1();
+        void set_type(const int type_){type = type_;};
+        void set_c(const int c_){c = c_;};
 
     private:
         double speed;
@@ -29,7 +31,8 @@ class Bullet : public Entity
         double y_pos;
         double angle;
         bool is_move;
-
+        int type;
+        int c;
 };
 
 #endif

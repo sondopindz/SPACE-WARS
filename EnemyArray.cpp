@@ -123,7 +123,7 @@ void EnemyBoss(vector<Enemy*> &EnemyArray, SDL_Renderer* renderer)
         enemy->set_angle_rotate_speed(0.5);
         enemy->SetWidthHeight(100, 100);
         enemy->SetRect(SCREEN_WIDTH/2 - enemy->GetRect().w/2, -enemy->GetRect().h);
-        enemy->set_y_limit(100);
+        enemy->set_y_limit(50);
         EnemyArray.push_back(enemy);
     }
 }

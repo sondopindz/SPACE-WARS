@@ -1,6 +1,6 @@
 #include "Collision.h"
 
-void Collision(vector<Enemy*>&Enemy_List, vector<Bullet*> &Bullet_List, Plane &plane_, SDL_Renderer* renderer, Mix_Chunk* explo, bool &Gameover, long &current_score, Mix_Chunk* hit, Mix_Chunk* game_over)
+void Collision(vector<Enemy*> &Enemy_List, vector<Bullet*> &Bullet_List, Plane &plane_, SDL_Renderer* renderer, Mix_Chunk* explo, bool &Gameover, long &current_score, Mix_Chunk* hit, Mix_Chunk* game_over)
 {
 
     for(int i = 0; i < Enemy_List.size(); i++)

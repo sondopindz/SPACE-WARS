@@ -101,6 +101,7 @@ void Button::HandleRestartButton(SDL_Event &event, SDL_Renderer* renderer, vecto
 		    Win = false;
             current_score = 0;
             wave = 0;
+
             Enemy_List.erase(Enemy_List.begin(), Enemy_List.begin() + Enemy_List.size());
             Bullet_List.erase(Bullet_List.begin(), Bullet_List.begin() + Bullet_List.size());
             plane_.SetRect(SCREEN_WIDTH/2, SCREEN_HEIGHT - HEIGHT_PLANE);

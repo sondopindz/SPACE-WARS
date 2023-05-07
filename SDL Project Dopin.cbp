@@ -46,6 +46,7 @@
 		<Unit filename="Bullet.cpp" />
 		<Unit filename="Bullet.h" />
 		<Unit filename="Button.cpp" />
+		<Unit filename="Button.h" />
 		<Unit filename="Collision.cpp" />
 		<Unit filename="Collision.h" />
 		<Unit filename="Common_Function.cpp" />
@@ -57,6 +58,7 @@
 		<Unit filename="Entity.cpp" />
 		<Unit filename="Entity.h" />
 		<Unit filename="Game.cpp" />
+		<Unit filename="Game.h" />
 		<Unit filename="Plane.cpp" />
 		<Unit filename="Plane.h" />
 		<Unit filename="Text.cpp" />
